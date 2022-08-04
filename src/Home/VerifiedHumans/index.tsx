@@ -58,7 +58,7 @@ export const VerifiedHumans = memo(function VerifiedHumans(props: { className?: 
 			<div className="grid gap-y-4">
 				{humans.map((human, index) => (
 					<div className="relative bg-ffffff rounded-2xl border border-dce7e9 p-8" key={index}>
-						<div className="grid gap-y-4md:grid-cols-auto/fr gap-x-8">
+						<div className="grid gap-y-4 md:grid-cols-auto/fr gap-x-8">
 							<span
 								className={cn(
 									'relative h-24 w-24 p-8 text-ffffff bg-183c4a border',
@@ -94,7 +94,7 @@ export const VerifiedHumans = memo(function VerifiedHumans(props: { className?: 
 										</span>
 									</div>
 								</div>
-								
+
 								<div className="text-12 font-rubik">{human.content}</div>
 
 								<div className="flex gap-x-6">

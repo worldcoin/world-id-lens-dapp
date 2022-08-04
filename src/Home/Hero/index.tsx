@@ -4,7 +4,7 @@ import { memo, ReactNode } from 'react'
 export const Hero = memo(function Hero(props: { children?: ReactNode }) {
 	return (
 		<div className="grid place-items-start gap-y-16">
-			<Logo className="hidden md:block h-16" />
+			<Logo className="hidden md:flex" size="large" />
 
 			<div className="text-18">
 				<p>Worldcoin meets Lens</p>
