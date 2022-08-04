@@ -1,0 +1,1 @@
+export const shortHash = (hash) => `${hash.slice(0, 5)}...${hash.slice(-4)}`
