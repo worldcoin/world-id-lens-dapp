@@ -11,7 +11,7 @@ export const Logo = memo(function Logo(props: { className?: string; size?: 'defa
 				'flex items-center text-183c4a',
 				{
 					'h-6 gap-x-2': size === 'default',
-					'h-16 gap-x-16': size === 'large',
+					'h-16 gap-x-4': size === 'large',
 				},
 				className
 			)}
