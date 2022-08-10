@@ -1,4 +1,3 @@
-import 'tailwindcss/tailwind.css'
 import client from '@/lib/apollo'
 import { APP_NAME } from '@/lib/consts'
 import '@rainbow-me/rainbowkit/styles.css'
@@ -7,6 +6,7 @@ import { publicProvider } from 'wagmi/providers/public'
 import { chain, createClient, WagmiConfig, configureChains } from 'wagmi'
 import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit'
 import { ApolloProvider } from '@apollo/client'
+import '@/index.css'
 
 const { chains, provider } = configureChains(
 	[chain.polygon],
