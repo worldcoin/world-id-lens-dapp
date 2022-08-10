@@ -1,5 +1,3 @@
-const plugin = require('tailwindcss/plugin')
-
 const mirrorHexColors = colors =>
 	Object.fromEntries(
 		colors.map((color, index) => {
@@ -89,9 +87,4 @@ module.exports = {
 			},
 		},
 	},
-	plugins: [
-		plugin(function ({ addVariant }) {
-			addVariant('not-last', '&:not(:last-child)')
-		}),
-	],
 }
