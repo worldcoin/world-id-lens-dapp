@@ -8,7 +8,7 @@ import HumanCheck from '@/abi/HumanCheck.abi.json'
 import { FC, memo, useCallback, useState } from 'react'
 import { useContractWrite, usePrepareContractWrite } from 'wagmi'
 import { VerificationResponse, WorldIDWidget } from '@worldcoin/id'
-import { decodeProof } from '@/lib/utils'
+import { decodeProfileId, decodeProof, encodeSignal } from '@/lib/utils'
 
 type Props = {
 	profile: Profile
@@ -22,15 +22,14 @@ const VerifyLens: FC<Props> = ({ profile, onVerify, onReturn, modalState }) => {
 	const storeProof = useCallback((proof: VerificationResponse) => setProof(proof), [])
 
 	const { config } = usePrepareContractWrite({
-		onSuccess: onVerify,
 		functionName: 'verify',
 		enabled: !!profile && !!proof,
 		contractInterface: HumanCheck,
 		addressOrName: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
-		args: [profile?.id, proof?.merkle_root, proof?.nullifier_hash, decodeProof(proof?.proof)],
+		args: [decodeProfileId(profile?.id), proof?.merkle_root, proof?.nullifier_hash, decodeProof(proof?.proof)],
 	})
 
-	const { write } = useContractWrite(config)
+	const { write } = useContractWrite({ ...config, onSuccess: onVerify })
 	const verify = useCallback(() => write(), [write])
 
 	if (!profile) return
@@ -60,9 +59,10 @@ const VerifyLens: FC<Props> = ({ profile, onVerify, onReturn, modalState }) => {
 
 						<div className="z-50">
 							<WorldIDWidget
-								signal={profile?.id}
 								enableTelemetry={true}
 								onSuccess={storeProof}
+								advancedUseRawSignal={true}
+								signal={encodeSignal(profile?.id)}
 								actionId={process.env.NEXT_PUBLIC_WLD_SIGNAL}
 							/>
 						</div>
