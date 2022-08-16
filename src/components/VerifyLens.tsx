@@ -63,7 +63,7 @@ const VerifyLens: FC<Props> = ({ profile, onVerify, onReturn, modalState }) => {
 								onSuccess={storeProof}
 								advancedUseRawSignal={true}
 								signal={encodeSignal(profile?.id)}
-								actionId={process.env.NEXT_PUBLIC_WLD_SIGNAL}
+								actionId={process.env.NEXT_PUBLIC_WLD_ACTION_ID}
 							/>
 						</div>
 
