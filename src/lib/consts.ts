@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client'
 
-export const APP_NAME = 'Verify your Lens profile'
+export const APP_NAME = 'Lens x Worldcoin'
 export const API_URL = 'https://api.lens.dev'
 
 export const HUMANS_QUERY = gql`

@@ -61,7 +61,6 @@ const VerifyLens: FC<Props> = ({ profile, onVerify, onReturn, modalState }) => {
 							<WorldIDWidget
 								enableTelemetry={true}
 								onSuccess={storeProof}
-								advancedUseRawSignal={true}
 								signal={profile?.id}
 								actionId={process.env.NEXT_PUBLIC_WLD_ACTION_ID}
 							/>
