@@ -1,4 +1,3 @@
-import Icon from './Icon'
 import cn from 'classnames'
 import { FC, memo } from 'react'
 import WorldcoinIcon from './Icons/WorldcoinIcon'

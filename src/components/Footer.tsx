@@ -1,4 +1,3 @@
-import Icon from './Icon'
 import Link from 'next/link'
 import { memo } from 'react'
 import LensIcon from './Icons/LensIcon'
