@@ -8,7 +8,7 @@ import HumanCheck from '@/abi/HumanCheck.abi.json'
 import { FC, memo, useCallback, useState } from 'react'
 import { useContractWrite, usePrepareContractWrite } from 'wagmi'
 import { VerificationResponse, WorldIDWidget } from '@worldcoin/id'
-import { decodeProfileId, decodeProof, encodeSignal } from '@/lib/utils'
+import { decodeProfileId, decodeProof } from '@/lib/utils'
 
 type Props = {
 	profile: Profile
@@ -62,7 +62,7 @@ const VerifyLens: FC<Props> = ({ profile, onVerify, onReturn, modalState }) => {
 								enableTelemetry={true}
 								onSuccess={storeProof}
 								advancedUseRawSignal={true}
-								signal={encodeSignal(profile?.id)}
+								signal={profile?.id}
 								actionId={process.env.NEXT_PUBLIC_WLD_ACTION_ID}
 							/>
 						</div>

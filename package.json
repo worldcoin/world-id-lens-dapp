@@ -1,5 +1,5 @@
 {
-	"name": "dapp-starter",
+	"name": "world-id-lens",
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
@@ -15,7 +15,7 @@
 		"@graphql-codegen/fragment-matcher": "^3.2.1",
 		"@graphql-codegen/typescript": "^2.4.11",
 		"@heroicons/react": "^1.0.6",
-		"@worldcoin/id": "^0.4.0",
+		"@worldcoin/id": "^0.6.0",
 		"autoprefixer": "^10.4.7",
 		"classnames": "^2.3.1",
 		"connectkit": "^0.0.1",
