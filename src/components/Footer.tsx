@@ -8,13 +8,7 @@ const Footer = () => (
 	<div className="bg-183c4a text-ffffff mt-16 md:mt-0">
 		<div className="px-4 md:px-10 py-10">
 			<div className="flex flex-col md:flex-row space-y-6 md:space-y-0 items-center justify-between">
-				<p>
-					🌿 🪩 Lens World ID Verification, an{' '}
-					<a href="https://github.com/worldcoin/world-id-lens-dapp" target="_blank" rel="noopener noreferrer">
-						open source project
-					</a>{' '}
-					from Worldcoin.
-				</p>
+				<p>🌿 🪩 Lens World ID Verification, a open source project from Worldcoin.</p>
 
 				<div className="flex flex-col-reverse md:flex-row items-center gap-x-12 gap-y-2">
 					<Link href="https://lens.xyz" target="_blank" className="flex items-center">
