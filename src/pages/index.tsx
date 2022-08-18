@@ -7,11 +7,12 @@ import Button from '@/components/Button'
 import { HUMANS_QUERY } from '@/lib/consts'
 import { useToggle } from '@/hooks/useToggle'
 import { useAccount, useNetwork } from 'wagmi'
-import VerifyLens from '@/components/VerifyLens'
 import ConnectWallet from '@/components/ConnectWallet'
 import { memo, useState, useCallback, FC } from 'react'
 import VerifiedHumans from '@/components/VerifiedHumans'
+import VerifyModal from '@/components/Modals/VerifyModal'
 import { ChevronRightIcon } from '@heroicons/react/outline'
+import SuccessModal from '@/components/Modals/SuccessModal'
 import { PaginatedProfileResult, Profile } from '@/types/lens'
 import ProfileSelector from '@/components/Modals/ProfileSelector'
 
@@ -19,28 +20,35 @@ const Home: FC<{ humans: Profile[] }> = ({ humans }) => {
 	const { chain } = useNetwork()
 	const { isConnected } = useAccount()
 	const [profile, setProfile] = useState<Profile>()
+	const [txHash, setTxHash] = useState<string>(null)
 
-	const verifyModal = useToggle()
+	const profileModal = useToggle()
+	const successModal = useToggle()
 	const verifyLensModal = useToggle()
 
 	const handleProfileSelect = useCallback(
 		(profile: Profile) => {
 			setProfile(profile)
-			verifyModal.toggleOff()
+			profileModal.toggleOff()
 			verifyLensModal.toggleOn()
 		},
-		[verifyModal, verifyLensModal]
+		[profileModal, verifyLensModal]
 	)
 
-	const handleLensVerify = useCallback(({ hash }) => {
-		window.open(`https://polygonscan.com/tx/${hash}`)
-	}, [])
+	const handleLensVerify = useCallback(
+		({ hash }) => {
+			setTxHash(hash)
+			successModal.toggleOn()
+			verifyLensModal.toggleOff()
+		},
+		[successModal, verifyLensModal]
+	)
 
 	const handleReturn = useCallback(() => {
 		setProfile(null)
 		verifyLensModal.toggleOff()
-		verifyModal.toggleOn()
-	}, [verifyModal, verifyLensModal])
+		profileModal.toggleOn()
+	}, [profileModal, verifyLensModal])
 
 	return (
 		<>
@@ -54,7 +62,7 @@ const Home: FC<{ humans: Profile[] }> = ({ humans }) => {
 						{isConnected && !chain?.unsupported && (
 							<Button
 								className="flex gap-x-4 items-center"
-								onClick={verifyModal.toggleOn}
+								onClick={profileModal.toggleOn}
 								size="large"
 								uppercase
 								variant="dark"
@@ -70,8 +78,9 @@ const Home: FC<{ humans: Profile[] }> = ({ humans }) => {
 				<Footer />
 			</div>
 
-			<ProfileSelector modalState={verifyModal} onSelect={handleProfileSelect} />
-			<VerifyLens
+			<SuccessModal modalState={successModal} txHash={txHash} profile={profile} />
+			<ProfileSelector modalState={profileModal} onSelect={handleProfileSelect} />
+			<VerifyModal
 				profile={profile}
 				onReturn={handleReturn}
 				onVerify={handleLensVerify}

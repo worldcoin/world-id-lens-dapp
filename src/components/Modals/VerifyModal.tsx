@@ -1,8 +1,8 @@
-import Button from './Button'
-import Modal from './Modals/Modal'
-import LensAvatar from './LensAvatar'
+import Button from '../Button'
+import Modal from './Modal'
+import LensAvatar from '../LensAvatar'
 import { Profile } from '@/types/lens'
-import ProfileCard from './ProfileCard'
+import ProfileCard from '../ProfileCard'
 import { useToggle } from '@/hooks/useToggle'
 import HumanCheck from '@/abi/HumanCheck.abi.json'
 import { FC, memo, useCallback, useState } from 'react'
@@ -12,12 +12,12 @@ import { decodeProfileId, decodeProof, encodeSignal } from '@/lib/utils'
 
 type Props = {
 	profile: Profile
-	onVerify: (data) => void
 	onReturn: () => void
+	onVerify: (data) => void
 	modalState: ReturnType<typeof useToggle>
 }
 
-const VerifyLens: FC<Props> = ({ profile, onVerify, onReturn, modalState }) => {
+const VerifyModal: FC<Props> = ({ profile, onVerify, onReturn, modalState }) => {
 	const [proof, setProof] = useState<VerificationResponse>(null)
 	const storeProof = useCallback((proof: VerificationResponse) => setProof(proof), [])
 
@@ -67,7 +67,11 @@ const VerifyLens: FC<Props> = ({ profile, onVerify, onReturn, modalState }) => {
 							/>
 						</div>
 
-						<ProfileCard verified className="w-full rounded-2xl border border-dfe2e3" profile={profile} />
+						<ProfileCard
+							profile={profile}
+							verified="pending"
+							className="w-full rounded-2xl border border-dfe2e3"
+						/>
 					</div>
 				</div>
 
@@ -79,4 +83,4 @@ const VerifyLens: FC<Props> = ({ profile, onVerify, onReturn, modalState }) => {
 	)
 }
 
-export default memo(VerifyLens)
+export default memo(VerifyModal)
