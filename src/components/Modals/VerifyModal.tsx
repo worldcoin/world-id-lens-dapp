@@ -61,7 +61,7 @@ const VerifyModal: FC<Props> = ({ profile, onVerify, onReturn, modalState }) => 
 							<WorldIDWidget
 								enableTelemetry={true}
 								onSuccess={storeProof}
-								signal={profile?.id}
+								signal={profile?.id ? `0x${profile?.id.padStart(64, '0')}` : ''}
 								actionId={process.env.NEXT_PUBLIC_WLD_ACTION_ID}
 							/>
 						</div>
