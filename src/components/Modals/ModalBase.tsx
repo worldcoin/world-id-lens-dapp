@@ -1,12 +1,13 @@
 import { useToggle } from '@/hooks/useToggle'
-import { FC, memo, PropsWithChildren, useCallback, useEffect } from 'react'
+import { FC, memo, PropsWithChildren, ReactNode, useCallback, useEffect } from 'react'
 
 export type Props = PropsWithChildren<{
+	backdrop?: ReactNode
 	dismissible?: boolean
 	modalState: ReturnType<typeof useToggle>
 }>
 
-const ModalBase: FC<Props> = ({ modalState, dismissible = true, children }) => {
+const ModalBase: FC<Props> = ({ modalState, backdrop, dismissible = true, children }) => {
 	// ANCHOR: remove scrollbar if show
 	useEffect(() => {
 		document.documentElement.style.overflow = modalState.isOn ? 'hidden' : ''
@@ -40,7 +41,9 @@ const ModalBase: FC<Props> = ({ modalState, dismissible = true, children }) => {
 				<div className="pointer-events-auto">{children}</div>
 			</div>
 
-			<div className="absolute inset-0 z-0 bg-202124/50" onClick={handleClickOverlay}></div>
+			<div className="absolute inset-0 z-0 bg-202124/50" onClick={handleClickOverlay}>
+				{backdrop}
+			</div>
 		</div>
 	)
 }

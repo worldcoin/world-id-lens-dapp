@@ -6,9 +6,9 @@ import LensAvatar from './LensAvatar'
 
 type Props = {
 	profile: Profile
-	verified: boolean
 	className?: string
 	selected?: boolean
+	verified: boolean | 'pending'
 	onSelect?: (id: string) => void
 }
 
@@ -16,11 +16,12 @@ const ProfileCard: FC<Props> = ({ profile, verified, className, selected, onSele
 	return (
 		<div
 			className={cn(
-				'grid grid-cols-auto/fr gap-x-4 items-center p-5 cursor-pointer',
+				'grid grid-cols-auto/fr gap-x-4 items-center p-5',
 				'transition-colors',
 				{
 					'bg-dde7ea/30': selected,
-					'hover:bg-dde7ea/10': !selected,
+					'cursor-pointer': onSelect,
+					'hover:bg-dde7ea/10': !selected && onSelect,
 				},
 				className
 			)}
@@ -34,7 +35,7 @@ const ProfileCard: FC<Props> = ({ profile, verified, className, selected, onSele
 							selected ? 'bg-[#F5F8F9]' : 'bg-white'
 						}`}
 					>
-						<VerifiedIcon className="w-5 h-5 animate-pulse" />
+						<VerifiedIcon className={`w-5 h-5 ${verified == 'pending' ? 'animate-pulse' : ''}`} />
 					</span>
 				)}
 			</span>
@@ -51,7 +52,11 @@ const ProfileCard: FC<Props> = ({ profile, verified, className, selected, onSele
 						<>
 							<span>&nbsp;&bull;&nbsp;</span>
 
-							<span className="bg-gradient-to-b from-4940e0 to-7c74fb text-transparent bg-clip-text animate-pulse">
+							<span
+								className={`bg-gradient-to-b from-4940e0 to-7c74fb text-transparent bg-clip-text ${
+									verified == 'pending' ? 'animate-pulse' : ''
+								}`}
+							>
 								Verified Human
 							</span>
 						</>
