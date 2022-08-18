@@ -12,6 +12,11 @@ export const HUMANS_QUERY = gql`
 				handle
 				name
 				bio
+				onChainIdentity {
+					worldcoin {
+						isHuman
+					}
+				}
 				picture {
 					__typename
 					... on NftImage {

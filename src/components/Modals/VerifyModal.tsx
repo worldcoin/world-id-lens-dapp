@@ -9,6 +9,7 @@ import { FC, memo, useCallback, useState } from 'react'
 import { useContractWrite, usePrepareContractWrite } from 'wagmi'
 import { VerificationResponse, WorldIDWidget } from '@worldcoin/id'
 import { encodeProfileId, decodeProof } from '@/lib/utils'
+import VerifiedIcon from '../Icons/VerifiedIcon'
 
 type Props = {
 	profile: Profile
@@ -40,7 +41,14 @@ const VerifyModal: FC<Props> = ({ profile, onVerify, onReturn, modalState }) => 
 			modalState={modalState}
 			header={
 				<div className="flex gap-x-1 p-2 pr-4 bg-183c4a/[5%] rounded-full ">
-					<LensAvatar className="w-8 h-8 rounded-full" profile={profile} />
+					<div className="relative w-8 h-8 mr-1">
+						<LensAvatar className="w-8 h-8 rounded-full" profile={profile} />
+						{profile.onChainIdentity.worldcoin.isHuman && (
+							<span className="p-0.5 rounded-full absolute -bottom-1 -right-1 grid transition bg-[#F4F5F6]">
+								<VerifiedIcon className="w-3 h-3" />
+							</span>
+						)}
+					</div>
 
 					<div className="font-rubik">
 						<p className="text-14">{profile.name}</p>

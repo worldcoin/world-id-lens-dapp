@@ -37,10 +37,10 @@ const SelectProfile: FC<Props> = ({ onSelect, modalState }) => {
 					{profiles?.map((profile, index) => (
 						<ProfileCard
 							key={index}
-							verified={false}
 							profile={profile}
 							onSelect={setSelectedId}
 							selected={selectedId === profile.id}
+							verified={profile.onChainIdentity.worldcoin.isHuman}
 						/>
 					))}
 				</div>

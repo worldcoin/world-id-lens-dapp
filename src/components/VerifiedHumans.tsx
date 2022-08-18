@@ -17,9 +17,11 @@ export const VerifiedHumans: FC<{ humans: Profile[]; className?: string }> = ({ 
 					<div className="flex items-center gap-x-8">
 						<span className="relative h-24 w-24 p-8 flex-shrink-0">
 							<LensAvatar profile={profile} className="absolute inset-0 rounded-full border" />
-							<span className={`p-1 rounded-full absolute bottom-0 right-0 grid transition bg-white`}>
-								<VerifiedIcon className="w-5 h-5" />
-							</span>
+							{profile.onChainIdentity.worldcoin.isHuman && (
+								<span className={`p-1 rounded-full absolute bottom-0 right-0 grid transition bg-white`}>
+									<VerifiedIcon className="w-5 h-5" />
+								</span>
+							)}
 						</span>
 
 						<div className="grid gap-y-3 text-14">
@@ -32,9 +34,11 @@ export const VerifiedHumans: FC<{ humans: Profile[]; className?: string }> = ({ 
 									<span className="opacity-50">@{profile.handle}</span>
 									<span className="opacity-50">&nbsp;&bull;&nbsp;</span>
 
-									<span className="bg-gradient-to-b from-4940e0 to-7c74fb bg-clip-text text-transparent">
-										Verified Human
-									</span>
+									{profile.onChainIdentity.worldcoin.isHuman && (
+										<span className="bg-gradient-to-b from-4940e0 to-7c74fb bg-clip-text text-transparent">
+											Verified Human
+										</span>
+									)}
 								</div>
 							</div>
 
