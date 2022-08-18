@@ -1,22 +1,12 @@
 import { ABIEncodedValue } from '@worldcoin/id'
-import { defaultAbiCoder as abi, solidityKeccak256, solidityPack } from 'ethers/lib/utils'
+import { defaultAbiCoder as abi, solidityPack } from 'ethers/lib/utils'
 
 export const shortAddr = hash => `${hash.slice(0, 5)}...${hash.slice(-4)}`
 
-export const encodeSignal = (profileId?: string): string => {
-	if (!profileId) return ''
-
-	const rawDigest = (
-		BigInt(solidityKeccak256(['bytes'], [solidityPack(['uint256'], [decodeProfileId(profileId)])])) >> BigInt(8)
-	).toString(16)
-
-	return `0x${rawDigest.padStart(64, '0')}`
-}
-
-export const decodeProfileId = (profileId?: string): number => {
+export const encodeProfileId = (profileId?: string): string => {
 	if (!profileId) return
 
-	return parseInt(profileId)
+	return solidityPack(['uint256'], [profileId])
 }
 
 export const decodeProof = (proof: ABIEncodedValue | null) => {
