@@ -8,7 +8,7 @@ import HumanCheck from '@/abi/HumanCheck.abi.json'
 import { FC, memo, useCallback, useState } from 'react'
 import { useContractWrite, usePrepareContractWrite } from 'wagmi'
 import { VerificationResponse, WorldIDWidget } from '@worldcoin/id'
-import { decodeProfileId, decodeProof } from '@/lib/utils'
+import { encodeProfileId, decodeProof } from '@/lib/utils'
 
 type Props = {
 	profile: Profile
@@ -26,7 +26,7 @@ const VerifyModal: FC<Props> = ({ profile, onVerify, onReturn, modalState }) => 
 		enabled: !!profile && !!proof,
 		contractInterface: HumanCheck,
 		addressOrName: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
-		args: [decodeProfileId(profile?.id), proof?.merkle_root, proof?.nullifier_hash, decodeProof(proof?.proof)],
+		args: [profile?.id, proof?.merkle_root, proof?.nullifier_hash, decodeProof(proof?.proof)],
 	})
 
 	const { write } = useContractWrite({ ...config, onSuccess: onVerify })
@@ -61,7 +61,7 @@ const VerifyModal: FC<Props> = ({ profile, onVerify, onReturn, modalState }) => 
 							<WorldIDWidget
 								enableTelemetry={true}
 								onSuccess={storeProof}
-								signal={profile?.id ? `0x${profile?.id.replace('0x', '').padStart(64, '0')}` : ''}
+								signal={encodeProfileId(profile?.id)}
 								actionId={process.env.NEXT_PUBLIC_WLD_ACTION_ID}
 							/>
 						</div>
