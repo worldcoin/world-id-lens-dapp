@@ -29,7 +29,7 @@ const SelectProfile: FC<Props> = ({ onSelect, modalState }) => {
 	return (
 		<Modal modalState={modalState}>
 			<div className="grid gap-y-8">
-				<h3 className="text-24 font-semibold">
+				<h3 className="text-24 px-6 text-center">
 					Verify your <span className="text-4940e0">Lens profile</span> belongs to a human with World ID
 				</h3>
 
@@ -37,10 +37,10 @@ const SelectProfile: FC<Props> = ({ onSelect, modalState }) => {
 					{profiles?.map((profile, index) => (
 						<ProfileCard
 							key={index}
-							verified={false}
 							profile={profile}
 							onSelect={setSelectedId}
 							selected={selectedId === profile.id}
+							verified={profile.onChainIdentity.worldcoin.isHuman}
 						/>
 					))}
 				</div>

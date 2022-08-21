@@ -1,8 +1,8 @@
 import cn from 'classnames'
 import { FC, memo } from 'react'
+import LensAvatar from './LensAvatar'
 import { Profile } from '@/types/lens'
 import VerifiedIcon from './Icons/VerifiedIcon'
-import LensAvatar from './LensAvatar'
 
 type Props = {
 	profile: Profile
@@ -42,7 +42,7 @@ const ProfileCard: FC<Props> = ({ profile, verified, className, selected, onSele
 
 			<div className="grid gap-y-0.5">
 				<div className="flex items-center gap-x-1">
-					<p className="font-semibold text-20">{profile.name}</p>
+					<p className="font-medium text-20">{profile.name}</p>
 				</div>
 
 				<p className="text-14 text-183c4a/50">
