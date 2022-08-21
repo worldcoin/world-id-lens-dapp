@@ -1,14 +1,14 @@
-import Button from '../Button'
 import Modal from './Modal'
+import Button from '../Button'
 import LensAvatar from '../LensAvatar'
 import { Profile } from '@/types/lens'
 import ProfileCard from '../ProfileCard'
 import { useToggle } from '@/hooks/useToggle'
 import HumanCheck from '@/abi/HumanCheck.abi.json'
 import { FC, memo, useCallback, useState } from 'react'
+import { encodeProfileId, decodeProof } from '@/lib/utils'
 import { useContractWrite, usePrepareContractWrite } from 'wagmi'
 import { VerificationResponse, WorldIDWidget } from '@worldcoin/id'
-import { encodeProfileId, decodeProof } from '@/lib/utils'
 
 type Props = {
 	profile: Profile
