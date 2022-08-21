@@ -1,8 +1,7 @@
 import '@/index.css'
-import Head from 'next/head'
 import client from '@/lib/apollo'
 import { APP_NAME } from '@/lib/consts'
-import faviconImg from '@images/logo.png'
+import MetaTags from '@/components/MetaTags'
 import { ApolloProvider } from '@apollo/client'
 import { patchClient } from '@/lib/walletconnect-fix'
 import { chain, createClient, WagmiConfig } from 'wagmi'
@@ -24,10 +23,7 @@ const App = ({ Component, pageProps }) => {
 		<ApolloProvider client={client}>
 			<WagmiConfig client={wagmiClient}>
 				<ConnectKitProvider mode="light">
-					<Head>
-						<title>{APP_NAME}</title>
-						<link rel="shortcut icon" href={faviconImg.src} />
-					</Head>
+					<MetaTags />
 					<Component {...pageProps} />
 				</ConnectKitProvider>
 			</WagmiConfig>
