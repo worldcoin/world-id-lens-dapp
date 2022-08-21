@@ -3,14 +3,14 @@ import Button from '../Button'
 import LensAvatar from '../LensAvatar'
 import { Profile } from '@/types/lens'
 import ProfileCard from '../ProfileCard'
+import useProfiles from '@/hooks/useProfiles'
 import { useToggle } from '@/hooks/useToggle'
+import VerifiedIcon from '../Icons/VerifiedIcon'
 import HumanCheck from '@/abi/HumanCheck.abi.json'
-import { FC, memo, useCallback, useMemo, useState } from 'react'
 import { encodeProfileId, decodeProof } from '@/lib/utils'
+import { FC, memo, useCallback, useMemo, useState } from 'react'
 import { useContractWrite, usePrepareContractWrite } from 'wagmi'
 import { VerificationResponse, WorldIDWidget } from '@worldcoin/id'
-import VerifiedIcon from '../Icons/VerifiedIcon'
-import useProfiles from '@/hooks/useProfiles'
 
 type Props = {
 	profile: Profile

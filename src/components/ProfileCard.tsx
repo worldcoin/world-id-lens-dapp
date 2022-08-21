@@ -1,8 +1,8 @@
 import cn from 'classnames'
 import { FC, memo } from 'react'
+import LensAvatar from './LensAvatar'
 import { Profile } from '@/types/lens'
 import VerifiedIcon from './Icons/VerifiedIcon'
-import LensAvatar from './LensAvatar'
 
 type Props = {
 	profile: Profile
