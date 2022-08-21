@@ -33,27 +33,35 @@ const SelectProfile: FC<Props> = ({ onSelect, modalState }) => {
 					Verify your <span className="text-4940e0">Lens profile</span> belongs to a human with World ID
 				</h3>
 
-				<div className="rounded-xl border border-dfe2e3 overflow-clip divide-y divide-dfe2e3">
-					{profiles?.map((profile, index) => (
-						<ProfileCard
-							key={index}
-							profile={profile}
-							onSelect={setSelectedId}
-							selected={selectedId === profile.id}
-							verified={profile.onChainIdentity.worldcoin.isHuman}
-						/>
-					))}
-				</div>
+				{profiles?.length > 0 ? (
+					<>
+						<div className="rounded-xl border border-dfe2e3 overflow-clip divide-y divide-dfe2e3">
+							{profiles?.map((profile, index) => (
+								<ProfileCard
+									key={index}
+									profile={profile}
+									onSelect={setSelectedId}
+									selected={selectedId === profile.id}
+									verified={profile.onChainIdentity.worldcoin.isHuman}
+								/>
+							))}
+						</div>
 
-				<Button
-					size="medium"
-					variant="dark"
-					disabled={!selectedId}
-					onClick={selectProfile}
-					className="w-full text-15 text-center"
-				>
-					Select Profile
-				</Button>
+						<Button
+							size="medium"
+							variant="dark"
+							disabled={!selectedId}
+							onClick={selectProfile}
+							className="w-full text-15 text-center"
+						>
+							Select Profile
+						</Button>
+					</>
+				) : (
+					<p className="font-rubik text-858494 text-center">
+						You don&apos;t seem to have a Lens profile yet!
+					</p>
+				)}
 			</div>
 		</Modal>
 	)
