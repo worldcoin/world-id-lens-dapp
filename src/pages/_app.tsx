@@ -4,16 +4,19 @@ import client from '@/lib/apollo'
 import { APP_NAME } from '@/lib/consts'
 import faviconImg from '@images/logo.png'
 import { ApolloProvider } from '@apollo/client'
+import { patchClient } from '@/lib/walletconnect-fix'
 import { chain, createClient, WagmiConfig } from 'wagmi'
 import { ConnectKitProvider, getDefaultClient } from 'connectkit'
 
 const wagmiClient = createClient(
-	getDefaultClient({
-		autoConnect: true,
-		appName: APP_NAME,
-		chains: [chain.polygon],
-		infuraId: process.env.NEXT_PUBLIC_INFURA_ID,
-	})
+	patchClient(
+		getDefaultClient({
+			autoConnect: true,
+			appName: APP_NAME,
+			chains: [chain.polygon],
+			infuraId: process.env.NEXT_PUBLIC_INFURA_ID,
+		})
+	)
 )
 
 const App = ({ Component, pageProps }) => {
@@ -22,6 +25,7 @@ const App = ({ Component, pageProps }) => {
 			<WagmiConfig client={wagmiClient}>
 				<ConnectKitProvider mode="light">
 					<Head>
+						<title>{APP_NAME}</title>
 						<link rel="shortcut icon" href={faviconImg.src} />
 					</Head>
 					<Component {...pageProps} />
