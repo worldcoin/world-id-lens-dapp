@@ -1,15 +1,15 @@
-import Modal from './Modal'
 import Button from '../Button'
+import Modal from './Modal'
 import LensAvatar from '../LensAvatar'
 import { Profile } from '@/types/lens'
 import ProfileCard from '../ProfileCard'
 import { useToggle } from '@/hooks/useToggle'
-import VerifiedIcon from '../Icons/VerifiedIcon'
 import HumanCheck from '@/abi/HumanCheck.abi.json'
 import { FC, memo, useCallback, useState } from 'react'
-import { encodeProfileId, decodeProof } from '@/lib/utils'
+import { useContractWrite, usePrepareContractWrite } from 'wagmi'
 import { VerificationResponse, WorldIDWidget } from '@worldcoin/id'
-import { useContractWrite, useNetwork, usePrepareContractWrite } from 'wagmi'
+import { encodeProfileId, decodeProof } from '@/lib/utils'
+import VerifiedIcon from '../Icons/VerifiedIcon'
 
 type Props = {
 	profile: Profile
@@ -19,14 +19,12 @@ type Props = {
 }
 
 const VerifyModal: FC<Props> = ({ profile, onVerify, onReturn, modalState }) => {
-	const { chain } = useNetwork()
 	const [proof, setProof] = useState<VerificationResponse>(null)
 	const storeProof = useCallback((proof: VerificationResponse) => setProof(proof), [])
 
 	const { config } = usePrepareContractWrite({
-		chainId: chain?.id,
 		functionName: 'verify',
-		enabled: !chain?.unsupported && !!profile && !!proof,
+		enabled: !!profile && !!proof,
 		contractInterface: HumanCheck,
 		addressOrName: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
 		args: [profile?.id, proof?.merkle_root, proof?.nullifier_hash, decodeProof(proof?.proof)],
