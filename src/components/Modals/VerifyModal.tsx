@@ -86,7 +86,7 @@ const VerifyModal: FC<Props> = ({ profile, onVerify, onReturn, modalState }) => 
 						<ProfileCard
 							profile={profile}
 							className="w-full rounded-2xl border border-dfe2e3"
-							verified={profile.onChainIdentity.worldcoin.isHuman ?? 'pending'}
+							verified={profile.onChainIdentity.worldcoin.isHuman || 'pending'}
 						/>
 					</div>
 				</div>
