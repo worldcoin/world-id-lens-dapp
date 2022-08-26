@@ -27,7 +27,7 @@ export const VerifiedHumans: FC<{ humans: Profile[]; className?: string }> = ({ 
 						<div className="grid gap-y-3 text-14">
 							<div className="grid gap-y-0.5">
 								<div className="flex items-center gap-x-1">
-									<span className="text-20 font-semibold">{profile.name}</span>
+									<span className="text-20 font-semibold">{profile.name ?? profile.handle}</span>
 								</div>
 
 								<div className="flex items-center">

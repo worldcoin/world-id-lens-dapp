@@ -3,6 +3,12 @@ import { defaultAbiCoder as abi, solidityPack } from 'ethers/lib/utils'
 
 export const shortAddr = hash => `${hash.slice(0, 5)}...${hash.slice(-4)}`
 
+export const routeIPFSToGateway = (url: string, gateway = 'https://lens.infura-ipfs.io/ipfs/'): string => {
+	if (!url || url.startsWith('http')) return url
+
+	return `${gateway}${url.slice(7)}`
+}
+
 export const encodeProfileId = (profileId?: string): string => {
 	if (!profileId) return
 
