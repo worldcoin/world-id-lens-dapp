@@ -97,7 +97,7 @@ export const getStaticProps: GetStaticProps = async () => {
 		},
 	} = await client.query<{ profiles: PaginatedProfileResult }>({
 		query: HUMANS_QUERY,
-		variables: { profileIds: ['0xf5', '0x16', '0x8d0d'] },
+		variables: { profileIds: ['0xf5', '0x16', '0x24'] },
 	})
 
 	return {
