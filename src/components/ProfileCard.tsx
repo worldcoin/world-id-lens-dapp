@@ -30,12 +30,13 @@ const ProfileCard: FC<Props> = ({ profile, verified, className, selected, onSele
 			<span className="relative w-[80px] h-[80px]">
 				<LensAvatar className="absolute inset-0 rounded-full border" profile={profile} />
 				{verified && (
-					<span
-						className={`p-1 rounded-full absolute bottom-0 right-0 grid transition ${
-							selected ? 'bg-[#F5F8F9]' : 'bg-white'
-						}`}
-					>
-						<VerifiedIcon className={`w-5 h-5 ${verified == 'pending' ? 'animate-pulse' : ''}`} />
+					<span className="rounded-full absolute -bottom-1 -right-1">
+						<VerifiedIcon
+							width={30}
+							height={30}
+							border="text-white"
+							className={`${verified == 'pending' ? 'animate-pulse' : ''}`}
+						/>
 					</span>
 				)}
 			</span>

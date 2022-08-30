@@ -18,8 +18,8 @@ export const VerifiedHumans: FC<{ humans: Profile[]; className?: string }> = ({ 
 						<span className="relative h-24 w-24 p-8 flex-shrink-0">
 							<LensAvatar profile={profile} className="absolute inset-0 rounded-full border" />
 							{profile.onChainIdentity.worldcoin.isHuman && (
-								<span className={`p-1 rounded-full absolute bottom-0 right-0 grid transition bg-white`}>
-									<VerifiedIcon className="w-5 h-5" />
+								<span className="rounded-full absolute -bottom-1 -right-1">
+									<VerifiedIcon width={30} height={30} border="text-white" />
 								</span>
 							)}
 						</span>

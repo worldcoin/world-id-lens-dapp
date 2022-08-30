@@ -1,25 +1,26 @@
-import { FC, memo } from 'react'
+import classNames from 'classnames'
+import Image, { ImageProps } from 'next/image'
+import verifiedIcon from '@images/verified.png'
 
-const VerifiedIcon: FC<{ className?: string }> = ({ className = '' }) => (
-	<svg className={className} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16">
-		<path
-			fill="url(#a)"
-			d="M15.998 9.605a1.076 1.076 0 0 0-.143-.502l-.002-.002a1.229 1.229 0 0 0-.083-.126c-1.246-1.944-1.209-4.149-1.177-4.692.059-.593-.096-1.148-.635-1.564a1.047 1.047 0 0 0-.505-.201C11.223 2.182 9.52.91 8.994.48a2.215 2.215 0 0 0-.169-.145A1.533 1.533 0 0 0 7.461.053c-.22.058-.402.182-.55.356V.408C4.931 2.289 2.72 2.596 2.72 2.596c-.604.06-1.126.332-1.418.976a1.1 1.1 0 0 0-.077.606C1.422 6.63.431 8.68.233 9.064l-.031.059-.004.006c-.235.465-.288.978-.016 1.527.084.166.205.297.353.398 1.946 1.348 2.962 3.376 3.2 3.895.016.041.034.082.053.122l.001.003c.215.447.573.784 1.143.906.211.042.416.016.614-.065 2.573-.916 4.69-.181 4.69-.181.585.23 1.19.228 1.742-.236a1.1 1.1 0 0 0 .341-.562v.001c.929-2.57 2.95-3.91 2.95-3.91.448-.318.743-.772.73-1.422h-.002Z"
-		/>
-		<path
-			stroke="#fff"
-			strokeLinecap="round"
-			strokeLinejoin="round"
-			strokeWidth="1.6"
-			d="M9.938 6.956 7.402 9.451 6.25 8.317"
-		/>
-		<defs>
-			<linearGradient id="a" x1="8" x2="8" y1="0" y2="16" gradientUnits="userSpaceOnUse">
-				<stop stopColor="#4940E0" />
-				<stop offset="1" stopColor="#7C74FB" />
-			</linearGradient>
-		</defs>
-	</svg>
+type Props = Omit<ImageProps, 'src' | 'placeholder' | 'alt'> & { border?: string }
+
+const VerifiedIcon = ({ border, ...props }: Props) => (
+	<>
+		{border && (
+			<svg
+				className={classNames(
+					border,
+					'absolute left-1/2 top-1/2 w-[34px] -mt-[2px] transform -translate-x-1/2 -translate-y-1/2'
+				)}
+				xmlns="http://www.w3.org/2000/svg"
+				fill="currentColor"
+				viewBox="0 0 26 26"
+			>
+				<path d="M8.382 2.244a6.938 6.938 0 0 1 9.236 0l1.626 1.451c.346.308.722.581 1.122.815l1.882 1.098a6.937 6.937 0 0 1 2.854 8.784l-.877 1.995c-.187.424-.33.866-.428 1.319l-.463 2.129a6.938 6.938 0 0 1-7.473 5.429l-2.168-.218a6.934 6.934 0 0 0-1.386 0l-2.168.218a6.938 6.938 0 0 1-7.473-5.429l-.463-2.13a6.937 6.937 0 0 0-.428-1.318l-.877-1.995a6.938 6.938 0 0 1 2.854-8.784L5.634 4.51c.4-.234.776-.507 1.122-.815l1.626-1.45Z" />
+			</svg>
+		)}
+		<Image src={verifiedIcon} placeholder="blur" {...props} alt="Verified" />
+	</>
 )
 
-export default memo(VerifiedIcon)
+export default VerifiedIcon

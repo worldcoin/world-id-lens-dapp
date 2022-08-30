@@ -49,8 +49,8 @@ const SuccessModal: FC<Props> = ({ profile, txHash, modalState }) => {
 				<div className="flex gap-x-1.5 p-2 pr-4 bg-183c4a/[5%] rounded-full ">
 					<div className="relative w-8 h-8">
 						<LensAvatar className="w-8 h-8 rounded-full" profile={profile} />
-						<span className="p-0.5 rounded-full absolute -bottom-1 -right-1 grid transition bg-[#F4F5F6]">
-							<VerifiedIcon className="w-3 h-3" />
+						<span className="rounded-full absolute -bottom-1.5 -right-1.5">
+							<VerifiedIcon width={18} height={18} border="text-[#F5F6F6] !w-5 !-mt-[2.1px]" />
 						</span>
 					</div>
 
