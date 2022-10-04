@@ -11,7 +11,7 @@
 	},
 	"dependencies": {
 		"@apollo/client": "^3.6.6",
-		"@graphql-codegen/cli": "^2.6.2",
+		"@graphql-codegen/cli": "^2.12.0",
 		"@graphql-codegen/fragment-matcher": "^3.2.1",
 		"@graphql-codegen/typescript": "^2.4.11",
 		"@heroicons/react": "^1.0.6",
