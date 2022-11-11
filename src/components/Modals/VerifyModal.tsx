@@ -103,7 +103,7 @@ const VerifyModal: FC<Props> = ({ profile, onVerify, onReturn, modalState }) => 
 							</p>
 						)}
 						<Button disabled={!write} className="w-full" variant="dark" size="medium" onClick={verify}>
-							Verify @{profile.handle}
+							Verify (sign in your wallet) 
 						</Button>
 					</>
 				)}
