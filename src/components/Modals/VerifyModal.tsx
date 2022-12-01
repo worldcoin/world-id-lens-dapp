@@ -34,7 +34,16 @@ const VerifyModal: FC<Props> = ({ profile, onVerify, onReturn, modalState }) => 
 		enabled: !!profile && !!proof,
 		contractInterface: HumanCheck,
 		addressOrName: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
-		args: [profile?.id, proof?.merkle_root, proof?.nullifier_hash, decodeProof(proof?.proof)],
+		args: [
+			profile?.id,
+			proof?.merkle_root,
+			proof?.nullifier_hash,
+			decodeProof(proof?.proof),
+			{
+				gasLimit: 1300000,
+				value: 2,
+			},
+		],
 	})
 
 	const { write } = useContractWrite({ ...config, onSuccess: onVerify })
