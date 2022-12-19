@@ -7,27 +7,30 @@
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
-		"codegen": "graphql-codegen"
+		"codegen": "graphql-codegen",
+		"typecheck": "tsc",
+		"format": "prettier -w ./",
+		"format:check": "prettier --check ./"
 	},
 	"dependencies": {
-		"@apollo/client": "^3.6.6",
+		"@apollo/client": "^3.7.2",
 		"@graphql-codegen/cli": "^2.6.2",
-		"@graphql-codegen/fragment-matcher": "^3.2.1",
-		"@graphql-codegen/typescript": "^2.4.11",
+		"@graphql-codegen/fragment-matcher": "^3.3.3",
+		"@graphql-codegen/typescript": "^2.8.5",
 		"@heroicons/react": "^1.0.6",
 		"@worldcoin/id": "^0.9.2",
 		"autoprefixer": "^10.4.7",
-		"canvas-confetti": "^1.5.1",
+		"canvas-confetti": "^1.6.0",
 		"classnames": "^2.3.1",
-		"connectkit": "^0.0.2",
-		"ethers": "^5.7.1",
+		"connectkit": "^1.1.1",
+		"ethers": "^5.7.2",
 		"graphql": "^16.5.0",
 		"next": "12.1.6",
 		"postcss": "^8.4.14",
 		"react": "18.1.0",
 		"react-dom": "18.1.0",
 		"tailwindcss": "^3.0.24",
-		"wagmi": "^0.6.7"
+		"wagmi": "^0.9.4"
 	},
 	"devDependencies": {
 		"@types/node": "^17.0.35",
@@ -35,6 +38,7 @@
 		"eslint": "8.16.0",
 		"eslint-config-next": "12.1.6",
 		"postcss-nesting": "^10.1.10",
-		"typescript": "^4.6.4"
+		"typescript": "^4.6.4",
+		"prettier": "^2.7.1"
 	}
 }
