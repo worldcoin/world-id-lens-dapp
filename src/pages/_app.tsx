@@ -1,5 +1,5 @@
 import '@/index.css'
-import client from '@/lib/apollo'
+import { getClient } from '@/lib/apollo'
 import { APP_NAME } from '@/lib/consts'
 import MetaTags from '@/components/MetaTags'
 import { ApolloProvider } from '@apollo/client'
@@ -8,7 +8,9 @@ import { createClient, WagmiConfig } from 'wagmi'
 import { polygon } from '@wagmi/chains'
 
 import { ConnectKitProvider, getDefaultClient } from 'connectkit'
-
+import { useRouter } from 'next/router'
+import { useMemo } from 'react'
+import { Environment } from '@/types'
 
 const wagmiClient = createClient(
 	patchClient(
@@ -22,6 +24,13 @@ const wagmiClient = createClient(
 )
 
 const App = ({ Component, pageProps }) => {
+	const { query } = useRouter()
+
+	const client = useMemo(() => {
+		const env = query.env === 'staging' ? Environment.Staging : Environment.Production
+		return getClient(env)
+	}, [query, getClient])
+
 	return (
 		<ApolloProvider client={client}>
 			<WagmiConfig client={wagmiClient}>
