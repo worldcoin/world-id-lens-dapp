@@ -5,5 +5,5 @@
 	"allowCompoundWords": true,
 	"dictionaries": ["typescript", "node", "npm", "html"],
 	"enabledLanguageIds": ["typescript", "typescriptreact", "javascript", "markdown", "yaml", "json"],
-	"words": ["consts", "fren", "IDKit", "Lens", "wagmi", "Worldcoin"]
+	"words": ["consts", "fren", "IDKit", "Lens", "toastify", "wagmi", "Worldcoin"]
 }

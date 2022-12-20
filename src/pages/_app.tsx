@@ -6,11 +6,12 @@ import { ApolloProvider } from '@apollo/client'
 import { patchClient } from '@/lib/walletconnect-fix'
 import { createClient, WagmiConfig } from 'wagmi'
 import { polygon } from '@wagmi/chains'
-
+import { ToastContainer } from 'react-toastify'
 import { ConnectKitProvider, getDefaultClient } from 'connectkit'
 import { useRouter } from 'next/router'
 import { useMemo } from 'react'
 import { Environment } from '@/types'
+import 'react-toastify/dist/ReactToastify.css'
 
 const wagmiClient = createClient(
 	patchClient(
@@ -27,6 +28,7 @@ const App = ({ Component, pageProps }) => {
 	const { query } = useRouter()
 
 	const client = useMemo(() => {
+		console.count('client')
 		const env = query.env === 'staging' ? Environment.Staging : Environment.Production
 		return getClient(env)
 	}, [query, getClient])
@@ -37,6 +39,7 @@ const App = ({ Component, pageProps }) => {
 				<ConnectKitProvider mode="light">
 					<MetaTags />
 					<Component {...pageProps} />
+					<ToastContainer />
 				</ConnectKitProvider>
 			</WagmiConfig>
 		</ApolloProvider>
