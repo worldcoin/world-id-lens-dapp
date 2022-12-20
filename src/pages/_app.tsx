@@ -4,15 +4,18 @@ import { APP_NAME } from '@/lib/consts'
 import MetaTags from '@/components/MetaTags'
 import { ApolloProvider } from '@apollo/client'
 import { patchClient } from '@/lib/walletconnect-fix'
-import { chain, createClient, WagmiConfig } from 'wagmi'
+import { createClient, WagmiConfig } from 'wagmi'
+import { polygon } from '@wagmi/chains'
+
 import { ConnectKitProvider, getDefaultClient } from 'connectkit'
+
 
 const wagmiClient = createClient(
 	patchClient(
 		getDefaultClient({
 			autoConnect: true,
 			appName: APP_NAME,
-			chains: [chain.polygon],
+			chains: [polygon],
 			infuraId: process.env.NEXT_PUBLIC_INFURA_ID,
 		})
 	)

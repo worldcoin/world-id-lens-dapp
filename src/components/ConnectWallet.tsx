@@ -2,7 +2,8 @@ import { memo } from 'react'
 import Button from './Button'
 import { ConnectKitButton } from 'connectkit'
 import { ChevronRightIcon } from '@heroicons/react/outline'
-import { chain, useSwitchNetwork } from 'wagmi'
+import { useSwitchNetwork } from 'wagmi'
+import { polygon } from 'wagmi/chains'
 
 const ConnectWallet = () => {
 	const { switchNetwork } = useSwitchNetwork()
@@ -16,7 +17,7 @@ const ConnectWallet = () => {
 					return (
 						<Button
 							className="flex gap-x-4 items-center"
-							onClick={() => switchNetwork(chain.polygon.id)}
+							onClick={() => switchNetwork(polygon.id)}
 							size="large"
 							uppercase
 							variant="dark"
