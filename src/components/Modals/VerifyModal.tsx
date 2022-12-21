@@ -32,8 +32,8 @@ const VerifyModal: FC<Props> = ({ profile, onVerify, onReturn, modalState }) => 
 	const { config } = usePrepareContractWrite({
 		functionName: 'verify',
 		enabled: !!profile && !!proof,
-		contractInterface: HumanCheck,
-		addressOrName: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
+		abi: HumanCheck,
+		address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
 		args: [
 			profile?.id,
 			proof?.merkle_root,
@@ -112,7 +112,7 @@ const VerifyModal: FC<Props> = ({ profile, onVerify, onReturn, modalState }) => 
 							</p>
 						)}
 						<Button disabled={!write} className="w-full" variant="dark" size="medium" onClick={verify}>
-							Verify (sign in your wallet) 
+							Verify (sign in your wallet)
 						</Button>
 					</>
 				)}
