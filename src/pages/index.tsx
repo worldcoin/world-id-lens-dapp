@@ -7,7 +7,7 @@ import { HUMANS_QUERY } from '@/lib/consts'
 import { useToggle } from '@/hooks/useToggle'
 import { useAccount, useNetwork } from 'wagmi'
 import ConnectWallet from '@/components/ConnectWallet'
-import { memo, useState, useCallback, FC, useMemo } from 'react'
+import { memo, useState, useCallback, FC } from 'react'
 import VerifiedHumans from '@/components/VerifiedHumans'
 import VerifyModal from '@/components/Modals/VerifyModal'
 import { ChevronRightIcon } from '@heroicons/react/outline'
@@ -15,9 +15,7 @@ import SuccessModal from '@/components/Modals/SuccessModal'
 import { PaginatedProfileResult, Profile } from '@/types/lens'
 import ProfileSelector from '@/components/Modals/ProfileSelector'
 import { IDKitVerification } from '@/components/IDKitVerification'
-import { useRouter } from 'next/router'
-import { getClient } from '@/lib/apollo'
-import { Environment } from '@/types'
+import client from '@/lib/apollo'
 
 const Home: FC<{ humans: Profile[] }> = ({ humans }) => {
 	const { chain } = useNetwork()
@@ -28,13 +26,6 @@ const Home: FC<{ humans: Profile[] }> = ({ humans }) => {
 	const profileModal = useToggle()
 	const successModal = useToggle()
 	const verifyLensModal = useToggle()
-
-	const { query } = useRouter()
-
-	const client = useMemo(() => {
-		const env = query.env === 'staging' ? Environment.Staging : Environment.Production
-		return getClient(env)
-	}, [query, getClient])
 
 	const handleProfileSelect = useCallback(
 		(profile: Profile) => {
@@ -109,7 +100,7 @@ export const getStaticProps: GetStaticProps = async () => {
 		data: {
 			profiles: { items: humans },
 		},
-	} = await getClient(Environment.Production).query<{ profiles: PaginatedProfileResult }>({
+	} = await client.query<{ profiles: PaginatedProfileResult }>({
 		query: HUMANS_QUERY,
 		variables: { profileIds: ['0xf5', '0x16', '0x24'] },
 	})
