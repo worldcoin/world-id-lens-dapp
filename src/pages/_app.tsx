@@ -6,9 +6,8 @@ import { ApolloProvider } from '@apollo/client'
 import { patchClient } from '@/lib/walletconnect-fix'
 import { createClient, WagmiConfig } from 'wagmi'
 import { polygon } from '@wagmi/chains'
-import { ToastContainer } from 'react-toastify'
 import { ConnectKitProvider, getDefaultClient } from 'connectkit'
-import 'react-toastify/dist/ReactToastify.css'
+import { Toaster } from 'react-hot-toast'
 
 const wagmiClient = createClient(
 	patchClient(
@@ -28,7 +27,7 @@ const App = ({ Component, pageProps }) => {
 				<ConnectKitProvider mode="light">
 					<MetaTags />
 					<Component {...pageProps} />
-					<ToastContainer />
+					<Toaster />
 				</ConnectKitProvider>
 			</WagmiConfig>
 		</ApolloProvider>

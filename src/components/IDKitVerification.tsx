@@ -1,7 +1,7 @@
 import { IDKitWidget } from '@worldcoin/idkit'
 import type { ISuccessResult } from '@worldcoin/idkit'
 import { useAccount } from 'wagmi'
-import { toast } from 'react-toastify'
+import toast from 'react-hot-toast'
 import { useCallback } from 'react'
 import { IDKIT_ACTION_ID } from '@/lib/consts'
 
