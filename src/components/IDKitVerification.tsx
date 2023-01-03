@@ -1,9 +1,11 @@
-import { IDKitWidget } from '@worldcoin/idkit'
-import type { ISuccessResult } from '@worldcoin/idkit'
+import type { ISuccessResult, WidgetProps } from '@worldcoin/idkit'
 import { useAccount } from 'wagmi'
 import toast from 'react-hot-toast'
 import { useCallback } from 'react'
 import { IDKIT_ACTION_ID } from '@/lib/consts'
+import dynamic from 'next/dynamic'
+
+const IDKitWidget = dynamic<WidgetProps>(() => import('@worldcoin/idkit').then(mod => mod.IDKitWidget), { ssr: false })
 
 export function IDKitVerification(): JSX.Element {
 	const { address } = useAccount()
@@ -38,7 +40,7 @@ export function IDKitVerification(): JSX.Element {
 	)
 
 	return (
-		<IDKitWidget actionId={IDKIT_ACTION_ID} onSuccess={handleProof}>
+		<IDKitWidget actionId={IDKIT_ACTION_ID} signal={address} onSuccess={handleProof}>
 			{({ open }) => (
 				<button onClick={open} className="pt-4 cursor-pointer">
 					Verify with phone number
