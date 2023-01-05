@@ -1,6 +1,5 @@
 import type { ISuccessResult, WidgetProps } from '@worldcoin/idkit'
 import { useAccount } from 'wagmi'
-import toast from 'react-hot-toast'
 import { useCallback } from 'react'
 import { IDKIT_ACTION_ID } from '@/lib/consts'
 import dynamic from 'next/dynamic'
@@ -25,22 +24,25 @@ export function IDKitVerification(): JSX.Element {
 				}),
 			})
 
-			if (response.ok) return
+			if (response.ok) {
+				// Check with Lens API user has gasless enabled
+				return
+			}
 
 			if (response.status === 400 && (await response.json()).code === 'already_verified') {
-				throw toast.error(
+				throw new Error(
 					'You have already verified this phone number with Lens. You can only verify one wallet with one phone number.'
 				)
 			}
 
 			console.error('Failed to submit verification to Lens bridge.', response.status)
-			toast.error('Failed to submit verification to Lens bridge. Please try again.')
+			throw new Error()
 		},
 		[address]
 	)
 
 	return (
-		<IDKitWidget actionId={IDKIT_ACTION_ID} signal={address} onSuccess={handleProof}>
+		<IDKitWidget actionId={IDKIT_ACTION_ID} signal={address} onVerification={handleProof}>
 			{({ open }) => (
 				<button onClick={open} className="pt-4 cursor-pointer">
 					Verify with phone number
